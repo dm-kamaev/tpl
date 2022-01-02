@@ -1,6 +1,6 @@
 # Tpl
-Module for convenient templating html and other text content in runtime without special bundlers (as Webpack and etc) or special template engine (as Pug and etc), only javascript.
-This module allows use conditions operations `if/else if/else` and `switch/case/default`. The module to allows you to collect html code in functional style with methods: `forEach`, `each` (forEach for object).
+This library for convenient templating html and other text content in runtime without special bundlers (as Webpack and etc) or special template engine (as Pug, Handlebars and etc), only javascript.
+It allows to use condition operators `if/else if/else` and `switch/case/default`. The library allows you to collect html code in functional style with methods: `forEach`, `each` (forEach for object).
 
 ### Install
 ```sh
@@ -24,7 +24,7 @@ const html = `
 console.log(html); // => <div><span>From 0 to 100: 12</span></div>
 ```
 
-You can use only `if` or `if/else` in general as in the usual javascript code.
+You can use only `if` or `if/else` as in usual javascript code.
 Example `if`:
 ```js
 let score = -10;
@@ -66,8 +66,8 @@ let html = `
 console.log(html); // =>  <div><span>Default: 100</span></div>
 ```
 
-### Note:
-You can pass string as second argument instead function, if you want use static content:
+##### Note:
+You can pass string as second argument instead of function, if you want to use static content:
 ```js
 const score = 12;
 const html = `
@@ -99,7 +99,7 @@ const html = `
 console.log(html); // => <div><span>Total 24</span></div>
 ```
 
-You can pass string as second argument instead function, if you want use static content:
+You can pass string as second argument instead of function, if you want to use static content:
 ```js
 const score = 100;
 const html = `
