@@ -15,7 +15,7 @@ const tpl = module.exports;
  * @param  {Any}   params:
  * @return {String}
  */
-tpl.foreach = function (array, handler, params) {
+tpl.forEach = tpl.foreach = function (array, handler, params) {
   var res = '';
   for (var i = 0, l = array.length; i < l; i++) {
     var el = array[i];
@@ -25,6 +25,8 @@ tpl.foreach = function (array, handler, params) {
   }
   return res;
 };
+
+
 
 
 /**
@@ -110,10 +112,11 @@ class Switch_case {
       var task = els[1];
 
       if (condition === this._val) {
-        return task() || '';
+        const result = typeof task === 'function' ? task() : task;
+        return result || '';
       }
     }
-    return this._default_task() || '';
+    return (typeof this._default_task === 'function' ? this._default_task() : this._default_task) || '';
   }
 
   toString() {

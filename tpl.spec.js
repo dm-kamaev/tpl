@@ -6,9 +6,9 @@ const tpl = require('./tpl.js');
 
 describe('tpl.js', function () {
 
-  it('tpl.foreach', function () {
+  it('tpl.forEach', function () {
     var list = [10, 12, 24];
-    var str = tpl.foreach(list, function (el, i, params) {
+    var str = tpl.forEach(list, function (el, i, params) {
       return '<p>' + (el + params[i]) + '</p>';
     }, list);
     assert.ok(
@@ -40,48 +40,41 @@ describe('tpl.js', function () {
   //   );
   // });
 
+  test.each([
+    [100, '<div><span>100===100</span></div>'],
+    [12, '<div><span>12===12</span></div>'],
+    [1000, '<div><span>Default:1000</span></div>'],
+  ])('.switch: static', (score, expected) => {
+    const html = `
+    <div>
+      ${tpl
+        .switch(score)
+          .case(12, `<span>${score} === 12</span>`)
+          .case(100, `<span>${score} === 100 </span>`)
+          .default(() => `<span>Default: ${score}</span>`)
+      }
+    </div>
+    `;
+    expect(html.replace(/\s+/g, '')).toBe(expected);
+  });
 
-  it('tpl.switch', function () {
-    const fn_switch = function (variable) {
-      return tpl.switch(variable).case(1, function () {
-        return '<p>1</p>';
-      }).case(2, function () {
-        return '<p>2</p>';
-      }).default(function () {
-        return '<p>other</p>';
-      }).get();
-    };
 
-    assert.ok(
-      fn_switch(1) === '<p>1</p>',
-      'incorrect tpl.switch'
-    );
-
-    assert.ok(
-      fn_switch(2) === '<p>2</p>',
-      'incorrect tpl.switch'
-    );
-
-    assert.ok(
-      fn_switch(3) === '<p>other</p>',
-      'incorrect tpl.switch'
-    );
-
-    const switch_to_string = function (variable) {
-      return tpl.switch(variable).case(1, function () {
-        return '<p>1</p>';
-      }).case(2, function () {
-        return '<p>2</p>';
-      }).default(function () {
-        return '<p>other</p>';
-      });
-    };
-
-    assert.ok(
-      (switch_to_string(1) + '') === '<p>1</p>',
-      'incorrect tpl.switch'
-    );
-
+  test.each([
+    [1, '<div><p>1</p></div>'],
+    [2, '<div><p>2</p></div>'],
+    [100, '<div><p>other</p></div>'],
+  ])('.switch: dynamic', (variable, expected) => {
+    const html = `
+    <div>
+      ${tpl
+        .switch(variable)
+          .case(1, () => '<p>1</p>')
+          .case(2, () => '<p>2</p>')
+          .default(() => '<p>other</p>')
+      }
+    </div>
+    `;
+    expect(html.replace(/\s+/g, '')).toBe(expected);
   });
 
   it('tpl.if', function () {

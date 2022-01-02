@@ -1,16 +1,34 @@
 {
   "name": "@ignis-web/tpl",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "tpl.js",
   "scripts": {
     "test": "npx jest"
   },
-  "keywords": [],
+  "keywords": [
+    "template",
+    "html",
+    "engine",
+    "helper",
+    "helpers",
+    "style",
+    "css",
+    "classes",
+    "join strings",
+    "concat strings",
+    "if/else/elseif",
+    "switch/case/default",
+    "simple rendering html",
+    "handlebars",
+    "mustache",
+    "pug",
+    "jade"
+  ],
   "author": "dm-kamaev@rambler.ru",
   "license": "ISC",
-  "dependencies": {
-    "jest": "^27.4.5"
+  "devDependencies": {
+    "jest": "27.4.5"
   },
   "repository": {
     "type": "git",
