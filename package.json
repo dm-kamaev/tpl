@@ -1,0 +1,19 @@
+{
+  "name": "@ignis-web/tpl",
+  "version": "1.0.0",
+  "description": "",
+  "main": "tpl.js",
+  "scripts": {
+    "test": "npx jest"
+  },
+  "keywords": [],
+  "author": "dm-kamaev@rambler.ru",
+  "license": "ISC",
+  "dependencies": {
+    "jest": "^27.4.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dm-kamaev/tpl.git"
+  }
+}
