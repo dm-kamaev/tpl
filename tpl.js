@@ -111,7 +111,7 @@ class Switch_case {
       var condition = els[0];
       var task = els[1];
 
-      if (condition === this._val) {
+      if (condition === this._val || (condition instanceof Array && new Set(condition).has(this._val))) {
         const result = typeof task === 'function' ? task() : task;
         return result || '';
       }
@@ -224,3 +224,23 @@ function _search_in_else_if(list_else_if) {
   return false;
 }
 
+
+tpl.class = function (obj) {
+  var res = [];
+
+  var keys = Object.keys(obj);
+  for (var i = 0, l = keys.length; i < l; i++) {
+    var class_name = keys[i];
+    if (obj[class_name]) {
+      res.push(class_name);
+    }
+  }
+
+  if (!res.length) {
+    return '';
+  } else if (res.length === 1) {
+    return 'class=' + res[0];
+  } else {
+    return 'class=' + '"' + res.join(' ') + '"';
+  }
+};

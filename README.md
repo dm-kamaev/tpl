@@ -7,6 +7,13 @@ It allows to use condition operators `if/else if/else` and `switch/case/default`
 npm i @ignis-web/tpl -S
 ```
 
+List methods:
+  * **if/else/else if**
+  * **switch/case/default**
+  * **forEach**
+  * **each**
+  * **class**
+
 ### if/else_if/else
 ```js
 const tpl = require('@ignis-web/tpl');
@@ -115,6 +122,21 @@ const html = `
 console.log(html); // => <div><span>Total: 100</span></div>
 ```
 
+You can pass list as first argument in `.case`:
+```js
+const score = 12;
+const html = `
+  <div>
+    ${tpl
+      .switch(score)
+        .case([ 12, 25 ], () => `<span>Total: ${score}</span>`)
+        .default(() => `<span>Default: ${score}</span>`)
+    }
+  </div>
+  `;
+console.log(html); // => <div><span>Total 12</span></div>
+```
+
 ### forEach
 For rendering array:
 ```js
@@ -153,5 +175,16 @@ console.log(html); // =>
 */
 ```
 
+### class
+Simple switcher for css classes on element like in Vue js:
+```js
+const is_auth = true;
+const html =
+  `<div>
+    <p ${tpl.class({ 'login-in': is_auth, 'login-out': !is_auth })}></p>
+  </div>`;
+);
+console.log(html); // <div><p class="login-in"></p><div/>
+```
 
 

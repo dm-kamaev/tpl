@@ -77,6 +77,42 @@ describe('tpl.js', function () {
     expect(html.replace(/\s+/g, '')).toBe(expected);
   });
 
+  test.each([
+    [1, '<div><p>1or2</p></div>'],
+    [3, '<div><p>3</p></div>'],
+    [100, '<div><p>other</p></div>'],
+  ])('.switch: case array, static', (variable, expected) => {
+    const html = `
+    <div>
+      ${tpl
+        .switch(variable)
+          .case([1,2], '<p>1 or 2</p>')
+          .case(3, '<p>3</p>')
+          .default('<p>other</p>')
+      }
+    </div>
+    `;
+    expect(html.replace(/\s+/g, '')).toBe(expected);
+  });
+
+  test.each([
+    [1, '<div><p>1or2</p></div>'],
+    [3, '<div><p>3</p></div>'],
+    [100, '<div><p>other</p></div>'],
+  ])('.switch: case array, dynamic', (variable, expected) => {
+    const html = `
+    <div>
+      ${tpl
+        .switch(variable)
+          .case([1,2], () => '<p>1 or 2</p>')
+          .case(3, () => '<p>3</p>')
+          .default(() => '<p>other</p>')
+      }
+    </div>
+    `;
+    expect(html.replace(/\s+/g, '')).toBe(expected);
+  });
+
   it('tpl.if', function () {
     const func_if_elseif_else = function (variable) {
       return tpl.if(() => variable === 'if', () => 'if')
@@ -179,17 +215,17 @@ describe('tpl.js', function () {
   });
 
 
-  // it('tpl.class', function () {
-  //   assert.ok(
-  //     tpl.class({ test: true, abc: true }) === 'class="test abc"',
-  //     'incorrect tpl.class'
-  //   );
+  it('tpl.class', function () {
+    assert.ok(
+      tpl.class({ test: true, abc: true }) === 'class="test abc"',
+      'incorrect tpl.class'
+    );
 
-  //   assert.ok(
-  //     tpl.class({ test: true, abc: false }) === 'class=test',
-  //     'incorrect tpl.class'
-  //   );
-  // });
+    assert.ok(
+      tpl.class({ test: true, abc: false }) === 'class=test',
+      'incorrect tpl.class'
+    );
+  });
 
 });
 

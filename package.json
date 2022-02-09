@@ -1,6 +1,6 @@
 {
   "name": "@ignis-web/tpl",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "This library for convenient templating html and other text content in runtime without special bundlers (as Webpack and etc) or special template engine (as Pug, Handlebars and etc), only javascript",
   "main": "tpl.js",
   "scripts": {
